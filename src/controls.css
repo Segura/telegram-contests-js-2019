@@ -1,0 +1,66 @@
+.control-container {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+}
+
+.control-container label[class="seria-toggler"]:nth-child(n) {
+    margin-right: 0.8em;
+    margin-bottom: 0.8em;
+}
+
+.control-container label[class="seria-toggler"]:last-child {
+    margin-right: 0;
+}
+
+.seria-toggler {
+    display: inline-flex;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 3em;
+    border: 1px solid rgba(168, 168, 168, 0.3);
+    padding: 0.2em 0.8em 0.2em 0.2em;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.seria-toggler input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.seria-toggler-checkmark {
+    position: relative;
+    border-radius: 50%;
+    height: 1.1em;
+    width: 1.1em;
+    margin-right: 0.5em;
+    transition: border-width ease-in-out 0.15s;
+    border: 0.1em solid;
+}
+
+.seria-toggler-checkmark::after {
+    visibility: hidden;
+    display: block;
+    content: '\2714';
+    position: absolute;
+    top: -0.65em;
+    left: -0.4em;
+    color: white;
+    font-size: 0.8em;
+}
+
+.seria-toggler input[type="checkbox"]:checked ~ .seria-toggler-checkmark {
+    border-width: 0.55em;
+}
+
+.seria-toggler input[type="checkbox"]:checked ~ .seria-toggler-checkmark::after {
+    transition-delay: 0.15s;
+    transition-property: visibility;
+    visibility: visible;
+}
