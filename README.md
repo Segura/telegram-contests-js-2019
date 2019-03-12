@@ -1,13 +1,20 @@
 # Telegram Contests JS 2019
 
+## Prepare
+
+```bash
+npm i rollup-plugin-css-porter
+```
+
+
 ## Build
 
 ```bash
-rollup ./src/index.js --file ./build/bundle.js --format iife --name Graph`
+rollup --config prod.rollup.config.js
 ```
 
 ## Dev
 
 ```bash
-rollup ./src/index.js --file ./build/bundle.js --format iife --name Graph --watch
+rollup --config dev.rollup.config.js --watch
 ```

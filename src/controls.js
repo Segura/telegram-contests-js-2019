@@ -1,3 +1,5 @@
+import './controls.css';
+
 export const drawControls = (element, controlConfig = []) => {
     const container = createContainer();
     controlConfig.forEach((config) => {
