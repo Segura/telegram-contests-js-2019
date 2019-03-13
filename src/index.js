@@ -1,3 +1,4 @@
+import { Chart } from './chart'
 import { drawControls } from './controls.js'
 
 export const draw = (container, loadDataPromise, config = {}) => {
@@ -5,6 +6,7 @@ export const draw = (container, loadDataPromise, config = {}) => {
         console.log(rawData)
         const normalizedData = normalizeChartData(rawData);
         console.log(normalizedData);
+        new Chart(container, normalizedData, config)
         drawControls(container, normalizedData.yAxis);
     })
 }
