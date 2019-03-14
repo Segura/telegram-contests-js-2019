@@ -64,3 +64,8 @@
     transition-property: visibility;
     visibility: visible;
 }
+
+.control-canvas {
+    height: 200px;
+    width: 800px;
+}

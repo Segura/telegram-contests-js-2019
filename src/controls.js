@@ -17,7 +17,7 @@ const createContainer = () => {
 const createControl = (config = {}) => {
     let control = document.createElement('label');
     control.className = 'seria-toggler';
-    control.innerHTML = `<input type="checkbox" name="${config.name}"/><span class="seria-toggler-checkmark" style="color: ${config.color}"></span>${config.title}`;
+    control.innerHTML = `<input type="checkbox" checked name="${config.name}"/><span class="seria-toggler-checkmark" style="color: ${config.color}"></span>${config.title}`;
     control.onchange = config.onSeriaToggle;
     return control;
 };
