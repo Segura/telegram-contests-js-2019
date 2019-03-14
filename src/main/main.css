@@ -1,0 +1,13 @@
+.main-chart {
+    position: relative;
+}
+
+.main-chart canvas {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.main-chart canvas:first-child {
+    position: relative;
+}

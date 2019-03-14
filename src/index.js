@@ -1,3 +1,4 @@
+import { Chart } from './chart'
 import { drawControls } from './controls.js'
 import { GraphSelector } from './selector.js'
 
@@ -8,6 +9,7 @@ export const draw = (container, loadDataPromise, config = {}) => {
         console.log(normalizedData);
         const canvas = createCanvas();
         container.appendChild(canvas);
+        new Chart(container, normalizedData, config)
         drawControls(container, normalizedData.yAxis);
         const graphSelector = new GraphSelector(canvas, normalizedData);
         subscribeToEvent(container, 'toggleSeria', graphSelector.toggle);
