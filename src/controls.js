@@ -26,7 +26,7 @@ export class GraphControls {
     handleOnToggle(name) {
         return (e) => {
             if (e) {
-                const event = new CustomEvent('toggleSeria', {
+                const event = new CustomEvent('seriaToggle', {
                     detail: {
                         name,
                         value: e.target.checked

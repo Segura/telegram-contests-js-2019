@@ -9,7 +9,6 @@ export const draw = (container, loadDataPromise, config = {}) => {
         console.log(normalizedData);
         new Chart(container, normalizedData, config);
         const graphSelector = new GraphSelector(container, normalizedData);
-        subscribeToEvent(container, 'toggleSeria', graphSelector.toggle);
         graphSelector.draw();
         const graphControls = new GraphControls(container, {data: normalizedData.yAxis});
         graphControls.draw();
@@ -27,8 +26,4 @@ const normalizeChartData = (container, rawData = {}) => {
                 data: rawData.columns.find((column) => column[0] === name)
             }))
     }
-};
-
-const subscribeToEvent = (el, eventName, callback) => {
-    el.addEventListener(eventName, (e) => callback(e.detail.name, e.detail.value), false);
 };

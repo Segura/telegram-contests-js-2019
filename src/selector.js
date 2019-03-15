@@ -105,9 +105,7 @@ export class GraphSelector {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.releaseDrag = this.releaseDrag.bind(this);
 
-        this.canvas.addEventListener('mousedown', this.handleMouseDown);
-        document.addEventListener('mousemove', this.handleMouseMove);
-        document.addEventListener('mouseup', this.releaseDrag);
+        this.subscribe();
     }
 
     draw() {
@@ -119,7 +117,7 @@ export class GraphSelector {
 
     drawScope() {
         const {scopeStart, scopeEnd, hStrokeWidth, halfVStrokeWidth, vStrokeWidth} = this.scopeOptions;
-        this.context.fillStyle = 'rgba(60,60,60,0.05)';
+        this.context.fillStyle = 'rgba(0,0,0,0.1)';
         this.context.fillRect(0, 0, scopeStart, this.canvas.height);
 
         this.context.strokeStyle = 'rgba(200,200,200,0.15)';
@@ -136,7 +134,7 @@ export class GraphSelector {
         this.context.lineTo(scopeStart + halfVStrokeWidth, 0);
         this.context.stroke();
 
-        this.context.fillStyle = 'rgba(60,60,60,0.05)';
+        this.context.fillStyle = 'rgba(0,0,0,0.1)';
         this.context.fillRect(scopeEnd, 0, this.initialOptions.width, this.canvas.height);
     }
 
@@ -175,10 +173,13 @@ export class GraphSelector {
         this.options.yKoeff = (this.options.maxY - this.options.minY) / this.initialOptions.height;
     }
 
-    toggle(name, value) {
-        this.visibleCharts[name] = value;
-        this.recalcOptions();
-        this.draw();
+    toggle(e) {
+        if (e) {
+            const {name, value} = e.detail
+            this.visibleCharts[name] = value;
+            this.recalcOptions();
+            this.draw();
+        }
     }
 
     handleMouseDown(e) {
@@ -268,5 +269,12 @@ export class GraphSelector {
         });
 
         this.container.dispatchEvent(event);
+    }
+
+    subscribe() {
+        this.container.addEventListener('seriaToggle', this.toggle, false);
+        this.canvas.addEventListener('mousedown', this.handleMouseDown);
+        document.addEventListener('mousemove', this.handleMouseMove);
+        document.addEventListener('mouseup', this.releaseDrag);
     }
 }
