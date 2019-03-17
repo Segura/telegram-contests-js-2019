@@ -1,0 +1,19 @@
+{
+  "name": "telegram-contests-js-2019",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "node ./node_modules/rollup/bin/rollup --config dev.rollup.config.js --watch",
+    "build": "node ./node_modules/rollup/bin/rollup --config prod.rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Segura/telegram-contests-js-2019.git"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/Segura/telegram-contests-js-2019#readme",
+  "devDependencies": {
+    "rollup": "^1.6.0",
+    "rollup-plugin-css-porter": "^1.0.2"
+  }
+}
