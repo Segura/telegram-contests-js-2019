@@ -106,6 +106,7 @@ export class GraphSelector {
         this.releaseDrag = this.releaseDrag.bind(this);
 
         this.subscribe();
+        this.draw();
     }
 
     draw() {
@@ -262,8 +263,13 @@ export class GraphSelector {
     }
 
     notify(config) {
-        const event = new CustomEvent('notify', {
-            detail: config,
+        const max = this.data.xAxis.length
+        const ratio = (max - 1) / 1000
+        const event = new CustomEvent('changeRange', {
+            detail: {
+                start: Math.round(1 + ratio * config.scopeStart),
+                end: Math.round(1 + ratio * config.scopeEnd),
+            },
             bubbles: true,
             cancelable: true
         });

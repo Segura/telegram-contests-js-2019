@@ -1,6 +1,4 @@
 import { Chart } from './chart'
-import { GraphControls } from './controls.js'
-import { GraphSelector } from './selector.js'
 
 export const draw = (container, loadDataPromise, config = {}) => {
     loadDataPromise.then((rawData) => {
@@ -8,10 +6,6 @@ export const draw = (container, loadDataPromise, config = {}) => {
         const normalizedData = normalizeChartData(container, rawData);
         console.log(normalizedData);
         new Chart(container, normalizedData, config);
-        const graphSelector = new GraphSelector(container, normalizedData);
-        graphSelector.draw();
-        const graphControls = new GraphControls(container, {data: normalizedData.yAxis});
-        graphControls.draw();
     })
 };
 

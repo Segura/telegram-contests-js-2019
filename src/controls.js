@@ -13,6 +13,7 @@ export class GraphControls {
         this.config = config;
         this.draw = this.draw.bind(this);
         this.createControl = this.createControl.bind(this);
+        this.draw()
     }
 
     draw() {
