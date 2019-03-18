@@ -1,61 +1,41 @@
-import { Lines } from './lines'
-// import { XAxis } from './x-axis'
-import { YAxis } from './y-axis'
-// import { Details } from './details'
 import { createContainer } from '../utils'
+import { Lines } from '../main/lines'
+import { Scope } from './scope'
 
-import './main.css'
-
-export class Main {
+export class Selector {
 
     constructor(parent, data, config = {}) {
         this.container = createContainer(parent, 'main-chart')
+
         this.x = data.xAxis
         this.y = data.yAxis
-
         this.left = 1
-        this.right = this.x.length - 1
+        this.right = data.xAxis.length - 1
 
         this.recalculateYBounds()
-
-        this.config = Object.assign(Main.DEFAULT_CONFIG, config)
-
-        this.yAxis = new YAxis(this.container, this.min, this.max, this.config)
+        this.config = Object.assign(Selector.DEFAULT_CONFIG, config, { maxX: this.x.length - 1 })
 
         this.lines = new Lines(this.container, this.y, this.config)
         this.lines.changeBounds(this.min, this.max)
         this.lines.changeRange(this.left, this.right)
-        this.lines.subscribe('mousemove', this.lines.handleMouseMove)
 
-        // this.details = new Details(this.container, { ...this.config, lineWidth: 2 })
+        this.scope = new Scope(this.container, this.config)
 
         window.addEventListener('resize', this.onResize.bind(this))
-
         parent.addEventListener('seriaToggle', this.onToggleLine.bind(this), false)
-        parent.addEventListener('changeRange', this.onChangeRange.bind(this), false)
     }
 
     static get DEFAULT_CONFIG() {
         return {
             linesCount: 6,
-            hToWRatio: 0.3,
-            lineWidth: 3
+            hToWRatio: 0.1,
+            lineWidth: 1
         }
     }
 
     onResize() {
-        this.yAxis.onResize()
+        this.scope.onResize()
         this.lines.onResize()
-        // this.details.resize()
-    }
-
-    onChangeRange(e) {
-        const { start, end } = e.detail
-        this.left = start
-        this.right = end
-        this.recalculateYBounds()
-        this.lines.changeBounds(this.min, this.max)
-        this.lines.changeRange(this.left, this.right)
     }
 
     recalculateYBounds() {
@@ -77,13 +57,6 @@ export class Main {
         this.min = min
     }
 
-    onToggleLine(e) {
-        const { name, value } = e.detail
-        this.changeVisible(name, value)
-        this.recalculateYBounds()
-        this.lines.changeBounds(this.min, this.max)
-    }
-
     changeVisible(id, isVisible) {
         for (let i = 0; i < this.y.length; i++) {
             if (this.y[i].name === id) {
@@ -91,5 +64,12 @@ export class Main {
                 break
             }
         }
+    }
+
+    onToggleLine(e) {
+        const { name, value } = e.detail
+        this.changeVisible(name, value)
+        this.recalculateYBounds()
+        this.lines.changeBounds(this.min, this.max)
     }
 }

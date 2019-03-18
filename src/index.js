@@ -17,7 +17,8 @@ const normalizeChartData = (container, rawData = {}) => {
                 name,
                 color: rawData.colors[name],
                 title: rawData.names[name],
-                data: rawData.columns.find((column) => column[0] === name)
+                data: rawData.columns.find((column) => column[0] === name),
+                isVisible: true
             }))
     }
 };

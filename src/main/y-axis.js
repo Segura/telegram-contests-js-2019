@@ -1,16 +1,16 @@
 import { Drawable } from './drawable'
 
-export class YAxis extends Drawable{
+export class YAxis extends Drawable {
 
-    constructor (container, min, max, linesCount) {
-        super(container)
+    constructor (container, min, max, config = {}) {
+        super(container, config)
         this.min = min
         this.max = max
-        this.linesCount = linesCount
-        this.step = (max - min) / linesCount
+        this.linesCount = config.linesCount
+        this.step = (max - min) / this.linesCount
         this.calculateRatio()
 
-        window.requestAnimationFrame(() => this.draw())
+        window.requestAnimationFrame(this.draw)
     }
 
     initCanvas () {
@@ -40,6 +40,6 @@ export class YAxis extends Drawable{
 
             this.context.fillText(Math.round(i * this.step).toString(), 0, y - 10);
         }
-        window.requestAnimationFrame(() => this.draw())
+        window.requestAnimationFrame(this.draw)
     }
 }

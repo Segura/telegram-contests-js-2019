@@ -1,16 +1,27 @@
-export class Drawable {
+import { EventAware } from '../common/event-aware'
 
-    constructor (container) {
-        this.container = container
+export class Drawable extends EventAware {
+
+    constructor (container, config = { }) {
+        super(container)
         this.canvas = document.createElement('canvas')
         this.context = this.canvas.getContext('2d')
         this.container.appendChild(this.canvas)
+        this.config = config
+        this.clear = this.clear.bind(this)
+        this.draw = this.draw.bind(this)
         this.resize()
     }
 
     draw (delta) {}
 
-    initCanvas () {}
+    initCanvas () {
+        this.context.lineWidth = this.config.lineWidth
+    }
+
+    clear() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    }
 
     animateProperties (draw, properties, duration) {
         const start = performance.now();
@@ -43,8 +54,8 @@ export class Drawable {
     }
 
     resize () {
-        this.canvas.width  = this.container.offsetWidth
-        this.canvas.height = this.canvas.width / 2
+        this.canvas.width = this.canvas.clientWidth;
+        this.canvas.height = this.canvas.clientWidth * this.config.hToWRatio;
         this.initCanvas()
     }
 }
