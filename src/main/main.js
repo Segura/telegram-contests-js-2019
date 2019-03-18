@@ -1,7 +1,7 @@
 import { Lines } from './lines'
 // import { XAxis } from './x-axis'
 import { YAxis } from './y-axis'
-// import { Details } from './details'
+import { Details } from './details'
 import { createContainer } from '../utils'
 
 import './main.css'
@@ -27,7 +27,7 @@ export class Main {
         this.lines.changeRange(this.left, this.right)
         this.lines.subscribe('mousemove', this.lines.handleMouseMove)
 
-        // this.details = new Details(this.container, { ...this.config, lineWidth: 2 })
+        this.details = new Details(this.container, this.x, { ...this.config, lineWidth: 2 })
 
         window.addEventListener('resize', this.onResize.bind(this))
 
@@ -46,7 +46,7 @@ export class Main {
     onResize() {
         this.yAxis.onResize()
         this.lines.onResize()
-        // this.details.resize()
+        this.details.resize()
     }
 
     onChangeRange(e) {
