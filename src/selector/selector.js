@@ -28,7 +28,8 @@ export class Selector {
     static get DEFAULT_CONFIG() {
         return {
             hToWRatio: 0.1,
-            lineWidth: 1
+            lineWidth: 1,
+            hPadding: 10,
         }
     }
 

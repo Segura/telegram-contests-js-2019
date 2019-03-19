@@ -32,20 +32,20 @@ export class YAxis extends Drawable {
     }
 
     calculateRatio () {
-        this.ratio = this.canvas.height / (this.max - this.min)
+        this.ratio = this.canvas.drawableHeight / (this.max - this.min)
     }
 
     draw () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.clear()
         this.context.globalAlpha = this.alpha
-        this.drawLine(this.canvas.height, '0')
+        this.drawLine(this.canvas.height - this.config.hPadding, '0')
         for (let i = 1; i < this.linesCount; i++) {
-            const y = this.canvas.height - (i + this.direction) * this.step * this.ratio + this.offset
+            const y = this.getHBottom() - (i + this.direction) * this.step * this.ratio + this.offset
             this.drawLine(y, (Math.round(i * this.step)))
         }
         this.context.globalAlpha = 1 - this.alpha
         for (let i = 1; i < this.linesCount; i++) {
-            const y = this.canvas.height - i * this.step * this.ratio - this.offset
+            const y = this.getHBottom() - i * this.step * this.ratio - this.offset
             this.drawLine(y, (Math.round(i * this.oldStep)))
         }
     }

@@ -37,11 +37,11 @@ export class XAxis extends Drawable {
     }
 
     draw () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.clear()
         for (let i = 0; i < this.linesCount; i++) {
             const index = Math.round(this.left + i * this.step)
             const x = (i + 0.5) * this.step * this.ratio
-            this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.canvas.height);
+            this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getHBottom());
         }
     }
 
