@@ -21,9 +21,10 @@ export class Lines extends Drawable {
         if (!this.max) {
             this.max = max
         }
+        const ratio = this.canvas.drawableHeight / (max - min)
         this.animateProperties(
             this.draw,
-            { min, max, ratio: this.canvas.drawableHeight / (max - min) },
+            { min, max, ratio },
             300
         )
     }
@@ -43,9 +44,9 @@ export class Lines extends Drawable {
     drawLine(line) {
         this.context.strokeStyle = line.color
         this.context.beginPath()
-        this.context.moveTo(0, this.getHBottom() - this.ratio * (line.data[this.left] - this.min))
+        this.context.moveTo(0, this.getBottom() - this.ratio * (line.data[this.left] - this.min))
         for (let i = this.left; i <= this.right; i++) {
-            this.context.lineTo((i - this.left) * this.step, this.getHBottom() - this.ratio * (line.data[i] - this.min))
+            this.context.lineTo((i - this.left) * this.step, this.getBottom() - this.ratio * (line.data[i] - this.min))
         }
         this.context.stroke()
     }
@@ -57,6 +58,7 @@ export class Lines extends Drawable {
     onResize() {
         super.resize()
         this.ratio = this.canvas.drawableHeight / (this.max - this.min)
+        this.config.paddingBottom = this.min * this.ratio
         this.step = this.canvas.width / (this.right - this.left)
         this.draw()
     }
@@ -66,7 +68,7 @@ export class Lines extends Drawable {
             const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
             const detail = this.getVisibleLines().reduce((result, line) => {
                 result.lines.push({
-                    y: this.getHBottom() - Math.round((line.data[index] - this.min) * this.ratio),
+                    y: this.getBottom() - Math.round((line.data[index] - this.min) * this.ratio),
                     value: line.data[index],
                     color: line.color,
                     title: line.title

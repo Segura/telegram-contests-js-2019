@@ -59,18 +59,18 @@ export class Drawable extends EventAware {
         })
     }
 
-    getHTop () {
-        return this.config.hPadding
+    getTop () {
+        return this.config.paddingTop
     }
 
-    getHBottom() {
-        return this.canvas.height - this.config.hPadding
+    getBottom () {
+        return this.canvas.height - this.config.paddingBottom
     }
 
     resize () {
         this.canvas.width = this.canvas.clientWidth
         this.canvas.drawableHeight = this.canvas.clientWidth * this.config.hToWRatio
-        this.canvas.height = this.canvas.drawableHeight + this.config.hPadding * 2
+        this.canvas.height = this.canvas.drawableHeight + this.config.paddingTop + this.config.paddingBottom
         this.initCanvas()
     }
 }

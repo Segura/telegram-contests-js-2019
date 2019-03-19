@@ -56,7 +56,7 @@ export class Details extends Drawable {
         this.context.strokeStyle = 'rgba(200,200,200,0.25)'
         this.context.beginPath()
         this.context.moveTo(this.x, 0)
-        this.context.lineTo(this.x, this.getHBottom())
+        this.context.lineTo(this.x, this.getBottom())
         this.context.stroke()
     }
 

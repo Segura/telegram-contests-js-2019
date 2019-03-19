@@ -38,14 +38,14 @@ export class YAxis extends Drawable {
     draw () {
         this.clear()
         this.context.globalAlpha = this.alpha
-        this.drawLine(this.canvas.height - this.config.hPadding, '0')
+        this.drawLine(this.getBottom(), '0')
         for (let i = 1; i < this.linesCount; i++) {
-            const y = this.getHBottom() - (i + this.direction) * this.step * this.ratio + this.offset
+            const y = this.getBottom() - (i + this.direction) * this.step * this.ratio + this.offset
             this.drawLine(y, (Math.round(i * this.step)))
         }
         this.context.globalAlpha = 1 - this.alpha
         for (let i = 1; i < this.linesCount; i++) {
-            const y = this.getHBottom() - i * this.step * this.ratio - this.offset
+            const y = this.getBottom() - i * this.step * this.ratio - this.offset
             this.drawLine(y, (Math.round(i * this.oldStep)))
         }
     }
