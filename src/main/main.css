@@ -41,6 +41,15 @@
     display: flex;
 }
 
+.main-chart {
+    margin-bottom: 45px;
+    padding-bottom: 45px;
+}
+
 .main-chart canvas:first-child {
     position: relative;
+}
+
+.main-chart .xaxis {
+    top: 45px;
 }

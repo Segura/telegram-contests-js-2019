@@ -2,16 +2,19 @@ import { EventAware } from '../common/event-aware'
 
 export class Drawable extends EventAware {
 
-    constructor (container, config = { }) {
+    constructor (container, config = {}) {
         super(container)
         this.canvas = document.createElement('canvas')
+        this.canvas.classList.add(this.constructor.name.toLowerCase())
         this.context = this.canvas.getContext('2d')
         this.container.appendChild(this.canvas)
-        this.config = config
+        this.config = Object.assign(this.getDefaultConfig(), config)
         this.clear = this.clear.bind(this)
         this.draw = this.draw.bind(this)
         this.resize()
     }
+
+    getDefaultConfig () {return {}}
 
     draw (delta) {}
 

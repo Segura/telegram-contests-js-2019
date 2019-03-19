@@ -1,5 +1,5 @@
 import { Lines } from './lines'
-// import { XAxis } from './x-axis'
+import { XAxis } from './x-axis'
 import { YAxis } from './y-axis'
 import { Details } from './details'
 import { createContainer } from '../utils'
@@ -20,6 +20,7 @@ export class Main {
 
         this.config = Object.assign(Main.DEFAULT_CONFIG, config)
 
+        this.xAxis = new XAxis(this.container, this.x, this.left, this.right, this.config)
         this.yAxis = new YAxis(this.container, this.min, this.max, this.config)
 
         this.lines = new Lines(this.container, this.y, this.config)
@@ -50,6 +51,7 @@ export class Main {
     }
 
     onResize() {
+        this.xAxis.onResize()
         this.yAxis.onResize()
         this.lines.onResize()
         this.details.resize()
@@ -62,6 +64,8 @@ export class Main {
         this.recalculateYBounds()
         this.lines.changeBounds(this.min, this.max)
         this.lines.changeRange(this.left, this.right)
+        this.xAxis.changeRange(this.left, this.right)
+        this.yAxis.changeBounds(this.min, this.max)
     }
 
     recalculateYBounds() {
