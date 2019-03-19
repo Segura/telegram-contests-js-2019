@@ -66,7 +66,8 @@ export class Lines extends Drawable {
             const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
             const detail = this.getVisibleLines().reduce((result, line) => {
                 result.lines.push({
-                    value: this.canvas.height - Math.round((line.data[index] - this.min) * this.ratio),
+                    y: this.canvas.height - Math.round((line.data[index] - this.min) * this.ratio),
+                    value: line.data[index],
                     color: line.color,
                     title: line.title
                 })

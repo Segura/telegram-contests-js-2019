@@ -43,7 +43,7 @@ export class Details extends Drawable {
 
     getMinY() {
         return this.lines.reduce((result, line) => {
-            return Math.min(result, line.value)
+            return Math.min(result, line.y)
         }, Number.MAX_SAFE_INTEGER)
     }
 
@@ -63,8 +63,8 @@ export class Details extends Drawable {
     drawPoint(line) {
         const radius = 7
 
-        this.drawCircle(line.color, this.x, line.value, radius)
-        this.drawCircle(this.config.bgColor, this.x, line.value, radius - this.config.lineWidth)
+        this.drawCircle(line.color, this.x, line.y, radius)
+        this.drawCircle(this.config.bgColor, this.x, line.y, radius - this.config.lineWidth)
     }
 
     drawCircle(color, x, y, radius) {

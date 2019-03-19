@@ -44,3 +44,8 @@
 .main-chart canvas:first-child {
     position: relative;
 }
+
+.chart-title {
+    font-size: 2.5vw;
+    margin-bottom: 1em;
+}
