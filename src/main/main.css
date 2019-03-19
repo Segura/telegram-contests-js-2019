@@ -53,3 +53,8 @@
 .main-chart .xaxis {
     top: 45px;
 }
+
+.chart-title {
+    font-size: 2.5vw;
+    margin-bottom: 1em;
+}
