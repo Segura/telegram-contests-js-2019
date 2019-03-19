@@ -22,7 +22,7 @@
     user-select: none;
     border-radius: 3em;
     border: 1px solid rgba(168, 168, 168, 0.3);
-    padding: 0.2em 0.8em 0.2em 0.2em;
+    padding: 0.2em 0.8em 0.2em 0.4em;
     cursor: pointer;
     overflow: hidden;
 }

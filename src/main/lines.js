@@ -63,7 +63,7 @@ export class Lines extends Drawable {
 
     handleMouseMove(e) {
         if (e) {
-            const index = Math.round(e.offsetX / this.step + this.left)
+            const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
             const detail = this.getVisibleLines().reduce((result, line) => {
                 result.lines.push({
                     value: this.canvas.height - Math.round((line.data[index] - this.min) * this.ratio),
@@ -71,7 +71,7 @@ export class Lines extends Drawable {
                     title: line.title
                 })
                 return result
-            }, { lines: [], x: (index - this.left) * this.step })
+            }, { lines: [], x: (index - this.left) * this.step, index })
             this.notify('showDetails', detail)
         }
     }

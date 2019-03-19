@@ -27,7 +27,6 @@ export class Selector {
 
     static get DEFAULT_CONFIG() {
         return {
-            linesCount: 6,
             hToWRatio: 0.1,
             lineWidth: 1
         }

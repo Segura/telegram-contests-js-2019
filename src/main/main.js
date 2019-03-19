@@ -27,7 +27,7 @@ export class Main {
         this.lines.changeRange(this.left, this.right)
         this.lines.subscribe('mousemove', this.lines.handleMouseMove)
 
-        this.details = new Details(this.container, this.x, { ...this.config, lineWidth: 2 })
+        this.details = new Details(this.container, this.x, this.config)
 
         window.addEventListener('resize', this.onResize.bind(this))
 
@@ -39,7 +39,13 @@ export class Main {
         return {
             linesCount: 6,
             hToWRatio: 0.3,
-            lineWidth: 3
+            lineWidth: 3,
+            formatOptions: {
+                locale: 'ru-RU',
+                options: {
+                    weekday: 'short', month: 'short', day: 'numeric'
+                }
+            }
         }
     }
 

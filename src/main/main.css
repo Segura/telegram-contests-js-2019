@@ -9,7 +9,7 @@
     right: 0;
 }
 
-.main-chart div {
+.popup {
     position: absolute;
     left: 0;
     top: 0;
@@ -17,6 +17,20 @@
     box-shadow: 0 0 0.8em rgba(0,0,0,0.5);
     padding: 0.8em;
     border-radius: 0.3em;
+    flex-direction: column;
+}
+
+.popup-data {
+    display: flex;
+    margin-top: 0.8em;
+}
+
+.popup-data > *:nth-child(n) {
+    margin-right: 1em;
+}
+
+.popup-data > *:last-child {
+    margin-right: 0;
 }
 
 .hidden {
@@ -24,7 +38,7 @@
 }
 
 .visible {
-    display: block;
+    display: flex;
 }
 
 .main-chart canvas:first-child {
