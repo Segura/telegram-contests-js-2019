@@ -1,4 +1,5 @@
 export class EventAware {
+
     constructor(container) {
         this.container = container
     }
