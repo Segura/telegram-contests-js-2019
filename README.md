@@ -3,18 +3,17 @@
 ## Prepare
 
 ```bash
-npm i rollup-plugin-css-porter
+npm i
 ```
-
 
 ## Build
 
 ```bash
-rollup --config prod.rollup.config.js
+npm run build
 ```
 
 ## Dev
 
 ```bash
-rollup --config dev.rollup.config.js --watch
+npm run dev
 ```
