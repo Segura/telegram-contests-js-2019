@@ -35,7 +35,7 @@ export class Lines extends Drawable {
         this.animate(this.draw, 300)
     }
 
-    draw(delta = 1) {
+    draw() {
         this.clear()
         this.getVisibleLines().forEach(this.drawLine)
     }

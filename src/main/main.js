@@ -92,6 +92,7 @@ export class Main {
         this.changeVisible(name, value)
         this.recalculateYBounds()
         this.lines.changeBounds(this.min, this.max)
+        this.yAxis.changeBounds(this.min, this.max)
     }
 
     changeVisible(id, isVisible) {
