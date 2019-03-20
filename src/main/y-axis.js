@@ -8,6 +8,7 @@ export class YAxis extends Drawable {
 
         this.draw = this.draw.bind(this)
 
+        this.ratio = 0
         this.changeBounds(min, max)
     }
 
@@ -38,15 +39,14 @@ export class YAxis extends Drawable {
     draw () {
         this.clear()
         this.context.globalAlpha = this.alpha
-        this.drawLine(this.getBottom(), '0')
-        for (let i = 1; i < this.linesCount; i++) {
-            const y = this.getBottom() - (i + this.direction) * this.step * this.ratio + this.offset
-            this.drawLine(y, (Math.round(i * this.step)))
+        for (let i = 0; i < this.linesCount; i++) {
+            const y = this.getBottom() - i * this.step * this.ratio
+            this.drawLine(y, (Math.round(this.min + i * this.step)))
         }
         this.context.globalAlpha = 1 - this.alpha
-        for (let i = 1; i < this.linesCount; i++) {
-            const y = this.getBottom() - i * this.step * this.ratio - this.offset
-            this.drawLine(y, (Math.round(i * this.oldStep)))
+        for (let i = 0; i < this.linesCount; i++) {
+            const y = this.getBottom() - i * this.oldStep * this.ratio
+            this.drawLine(y, (Math.round(this.min + i * this.oldStep)))
         }
     }
 
@@ -62,17 +62,19 @@ export class YAxis extends Drawable {
         if (this.min === min && this.max === max) {
             return
         }
-        this.direction = max > this.max ? 1 : -1
-        this.offset = 0
+
         this.oldStep = this.step
+
         this.alpha = 0.5
         this.min = min
         this.max = max
         this.step = (max - min) / this.linesCount
-        this.calculateRatio()
+
+        const newRatio = this.canvas.drawableHeight / (this.max - this.min)
+
         this.animateProperties(this.draw, {
             'alpha': 1,
-            'offset': this.direction * this.step * this.ratio
-        }, 1000)
+            'ratio': newRatio
+        }, 300)
     }
 }
