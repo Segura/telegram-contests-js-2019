@@ -29,7 +29,7 @@ export class XAxis extends Drawable {
     onResize () {
         super.resize()
         this.calculateRatio()
-        this.animate(this.draw, 0)
+        this.animate(this.draw)
     }
 
     calculateRatio () {

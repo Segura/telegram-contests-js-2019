@@ -11,7 +11,7 @@ export class Lines extends Drawable {
         this.lines = lines
         this.ratio = 0
 
-        this.animate(this.draw, 0)
+        this.animate(this.draw)
     }
 
     changeBounds(min, max) {
@@ -33,7 +33,7 @@ export class Lines extends Drawable {
         this.left = left
         this.right = right
         this.step = this.canvas.width / (this.right - this.left)
-        this.animate(this.draw, 300)
+        this.animate(this.draw)
     }
 
     draw() {

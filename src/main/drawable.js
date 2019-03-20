@@ -47,7 +47,7 @@ export class Drawable extends EventAware {
         })
     }
 
-    animate (draw, duration) {
+    animate (draw, duration = 0) {
         const start = performance.now()
 
         requestAnimationFrame(function animate (time) {
