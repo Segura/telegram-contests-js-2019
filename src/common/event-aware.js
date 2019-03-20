@@ -1,7 +1,13 @@
+const DEBOUNCE = 1000 / 24
+
 export class EventAware {
 
     constructor(container) {
         this.container = container
+        this.debounces = {}
+        this.events = {}
+
+        this.sendEvent = this.sendEvent.bind(this)
     }
 
     static subscribeTo(element, eventName, handler) {
@@ -22,7 +28,22 @@ export class EventAware {
         EventAware.subscribeTo(this.container, eventName, handler)
     }
 
+    sendEvent(eventName) {
+        if (this.events[eventName]) {
+            EventAware.notifyTo(this.container, eventName, this.events[eventName])
+            this.events[eventName] = null
+            this.debounces[eventName] = setTimeout(() => this.sendEvent(eventName), DEBOUNCE)
+        } else {
+            this.debounces[eventName] = null
+        }
+    }
+
     notify(eventName, detail = {}) {
-        EventAware.notifyTo(this.container, eventName, detail)
+        if (this.debounces[eventName]) {
+            this.events[eventName] = detail
+        } else {
+            EventAware.notifyTo(this.container, eventName, detail)
+            this.debounces[eventName] = setTimeout(() => this.sendEvent(eventName), DEBOUNCE)
+        }
     }
 }
