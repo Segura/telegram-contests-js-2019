@@ -9,8 +9,11 @@ export class Drawable extends EventAware {
         this.context = this.canvas.getContext('2d')
         this.container.appendChild(this.canvas)
         this.config = Object.assign(this.getDefaultConfig(), config)
+        this.animationStart = false
+        this.animation = {}
         this.clear = this.clear.bind(this)
         this.draw = this.draw.bind(this)
+        this.animateTick = this.animateTick.bind(this)
         this.resize()
     }
 
@@ -27,24 +30,34 @@ export class Drawable extends EventAware {
     }
 
     animateProperties (draw, properties, duration) {
-        const start = performance.now()
+        this.animation = {
+            draw,
+            start: performance.now(),
+            duration,
+            fromValues: Object.keys(properties).reduce((result, property) => ({
+                ...result,
+                [property]: this[property]
+            }), {}),
+            toValues: properties
+        }
 
-        const currentValues = Object.keys(properties).reduce((result, property) => ({
-            ...result,
-            [property]: this[property]
-        }), {})
-        const self = this
+        if (!this.animationStart) {
+            requestAnimationFrame(this.animateTick)
+            this.animationStart = true
+        }
+    }
 
-        requestAnimationFrame(function animate (time) {
-            const delta = Math.min(Math.max((time - start) / duration, 0), 1)
-            Object.keys(properties).forEach((property) => {
-                self[property] = currentValues[property] + (properties[property] - currentValues[property]) * delta
-            })
-            draw(delta)
-            if (delta < 1) {
-                requestAnimationFrame(animate)
-            }
+    animateTick (time) {
+        const delta = Math.min(Math.max((time - this.animation.start) / this.animation.duration, 0), 1)
+        Object.keys(this.animation.toValues).forEach((property) => {
+            this[property] = this.animation.fromValues[property] + (this.animation.toValues[property] - this.animation.fromValues[property]) * delta
         })
+        this.animation.draw(delta)
+        if (delta < 1) {
+            requestAnimationFrame(this.animateTick)
+        } else {
+            this.animationStart = false
+        }
     }
 
     animate (draw, duration = 0) {
