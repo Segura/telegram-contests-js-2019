@@ -38,7 +38,7 @@ export class Scope extends Drawable {
         this.context.fillStyle = 'rgba(0,0,0,0.1)'
         this.context.fillRect(0, 0, scopeStart, this.canvas.height)
 
-        this.context.strokeStyle = 'rgba(200,200,200,0.15)'
+        this.context.strokeStyle = 'rgba(154,211,251,0.337)'
         this.context.beginPath()
         this.context.moveTo(scopeStart, 0)
         this.context.lineWidth = hStrokeWidth

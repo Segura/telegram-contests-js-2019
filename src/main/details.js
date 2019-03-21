@@ -72,7 +72,8 @@ export class Details extends Drawable {
         const radius = 7
 
         this.drawCircle(line.color, this.x, line.y, radius)
-        this.drawCircle(this.config.bgColor, this.x, line.y, radius - this.config.lineWidth)
+        const bgColor = getComputedStyle(document.body).getPropertyValue('background-color')
+        this.drawCircle(bgColor, this.x, line.y, radius - this.config.lineWidth)
     }
 
     drawCircle(color, x, y, radius) {
