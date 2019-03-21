@@ -75,8 +75,8 @@ export class XAxis extends Drawable {
             this.left = left
             this.right = right
             this.animateProperties(this.draw2, {
-                'alpha': 1,
-                'offset': 0
+                alpha: 1,
+                offset: 0
             }, 300)
         } else {
             console.log('shiffle')
@@ -88,8 +88,8 @@ export class XAxis extends Drawable {
             const newRatio = this.canvas.width / (this.right - this.left)
 
             this.animateProperties(this.draw, {
-                'alpha': 1,
-                'ratio': newRatio
+                alpha: 1,
+                ratio: newRatio
             }, 300)
         }
     }

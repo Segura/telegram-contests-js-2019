@@ -73,8 +73,8 @@ export class YAxis extends Drawable {
         const newRatio = this.canvas.drawableHeight / (this.max - this.min)
 
         this.animateProperties(this.draw, {
-            'alpha': 1,
-            'ratio': newRatio
+            alpha: 1,
+            ratio: newRatio
         }, 300)
     }
 }
