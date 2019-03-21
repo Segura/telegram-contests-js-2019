@@ -76,7 +76,7 @@ export class Main {
         let min = Number.MAX_SAFE_INTEGER
 
         this.y.filter((line) => line.isVisible).forEach((line) => {
-            for (let i = this.left; i < this.right; i++) {
+            for (let i = this.left; i <= this.right; i++) {
                 const value = line.data[i]
                 if (value > max) {
                     max = value
