@@ -27,7 +27,7 @@ export class Selector {
 
     static get DEFAULT_CONFIG() {
         return {
-            hToWRatio: 0.1,
+            hToWRatio: 0.05,
             lineWidth: 1,
             paddingTop: 10,
             paddingBottom: 10,

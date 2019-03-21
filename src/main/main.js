@@ -39,10 +39,10 @@ export class Main {
 
     static get DEFAULT_CONFIG() {
         return {
-            linesCount: 6,
-            hToWRatio: 0.3,
+            linesCount: 4,
+            hToWRatio: 0.25,
             lineWidth: 3,
-            paddingTop: 20,
+            paddingTop: 40,
             paddingBottom: 20,
             formatOptions: {
                 locale: 'ru-RU',
