@@ -26,18 +26,16 @@ export class GraphControls {
 
     handleOnToggle(name) {
         return (e) => {
-            if (e) {
-                const event = new CustomEvent('seriaToggle', {
-                    detail: {
-                        name,
-                        value: e.target.checked
-                    },
-                    bubbles: true,
-                    cancelable: true
-                });
+            const event = new CustomEvent('seriaToggle', {
+                detail: {
+                    name,
+                    value: e.target.checked
+                },
+                bubbles: true,
+                cancelable: true
+            });
 
-                this.container.dispatchEvent(event);
-            }
+            this.container.dispatchEvent(event);
         }
     }
 

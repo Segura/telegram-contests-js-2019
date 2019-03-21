@@ -58,7 +58,7 @@ export class Scope extends Drawable {
     }
 
     handleMouseDown(e) {
-        if (e && e.button === 0) {
+        if (e.button === 0) {
             this.scopeOptions.shouldDrag = this.scopeOptions.canDrag
             this.scopeOptions.shouldResize = this.scopeOptions.canResize
             this.scopeOptions.isLeftSide = e.layerX < this.scopeOptions.scopeStart + this.scopeOptions.vStrokeWidth
@@ -86,10 +86,8 @@ export class Scope extends Drawable {
 
     handleMouseMove(e) {
         const { shouldDrag, shouldResize } = this.scopeOptions
-        if (e) {
-            this.scopeOptions.canDrag = this.shouldDrag(e.layerX)
-            this.scopeOptions.canResize = !this.scopeOptions.canDrag && this.shouldResize(e.layerX)
-        }
+        this.scopeOptions.canDrag = this.shouldDrag(e.layerX)
+        this.scopeOptions.canResize = !this.scopeOptions.canDrag && this.shouldResize(e.layerX)
         this.canvas.style.cursor = 'auto'
         if (this.scopeOptions.canDrag) {
             this.canvas.style.cursor = 'move'
@@ -97,10 +95,10 @@ export class Scope extends Drawable {
         if (this.scopeOptions.canResize) {
             this.canvas.style.cursor = 'ew-resize'
         }
-        if (e && shouldDrag && e.movementX) {
+        if (shouldDrag && e.movementX) {
             this.drag(e)
         }
-        if (e && shouldResize && e.movementX) {
+        if (shouldResize && e.movementX) {
             this.resizeScope(e)
         }
     }

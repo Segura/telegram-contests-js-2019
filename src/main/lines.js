@@ -65,24 +65,20 @@ export class Lines extends Drawable {
     }
 
     handleMouseMove(e) {
-        if (e) {
-            const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
-            const detail = this.getVisibleLines().reduce((result, line) => {
-                result.lines.push({
-                    y: this.getBottom() - Math.round((line.data[index] - this.min) * this.ratio),
-                    value: line.data[index],
-                    color: line.color,
-                    title: line.title
-                })
-                return result
-            }, { lines: [], x: (index - this.left) * this.step, index, show: true })
-            this.notify('toggleDetails', detail)
-        }
+        const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
+        const detail = this.getVisibleLines().reduce((result, line) => {
+            result.lines.push({
+                y: this.getBottom() - Math.round((line.data[index] - this.min) * this.ratio),
+                value: line.data[index],
+                color: line.color,
+                title: line.title
+            })
+            return result
+        }, { lines: [], x: (index - this.left) * this.step, index, show: true })
+        this.notify('toggleDetails', detail)
     }
 
-    handleMouseLeave(e) {
-        if (e) {
-            this.notify('toggleDetails', { show: false })
-        }
+    handleMouseLeave() {
+        this.notify('toggleDetails', { show: false })
     }
 }
