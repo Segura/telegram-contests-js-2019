@@ -2,7 +2,7 @@ import { EventAware } from '../common/event-aware'
 
 export class Drawable extends EventAware {
 
-    constructor (container, config = {}) {
+    constructor(container, config = {}) {
         super(container)
         this.canvas = document.createElement('canvas')
         this.canvas.classList.add(this.constructor.name.toLowerCase())
@@ -17,19 +17,29 @@ export class Drawable extends EventAware {
         this.resize()
     }
 
-    getDefaultConfig () {return {}}
+    getDefaultConfig() {
+        return {
+            padding: {
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0
+            }
+        }
+    }
 
-    draw (delta) {}
+    draw(delta) {
+    }
 
-    initCanvas () {
+    initCanvas() {
         this.context.lineWidth = this.config.lineWidth
     }
 
-    clear () {
+    clear() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
-    animateProperties (draw, properties, duration) {
+    animateProperties(draw, properties, duration) {
         this.animation = {
             draw,
             start: performance.now(),
@@ -47,7 +57,7 @@ export class Drawable extends EventAware {
         }
     }
 
-    animateTick (time) {
+    animateTick(time) {
         const delta = Math.min(Math.max((time - this.animation.start) / this.animation.duration, 0), 1)
         Object.keys(this.animation.toValues).forEach((property) => {
             this[property] = this.animation.fromValues[property] + (this.animation.toValues[property] - this.animation.fromValues[property]) * delta
@@ -60,10 +70,10 @@ export class Drawable extends EventAware {
         }
     }
 
-    animate (draw, duration = 0) {
+    animate(draw, duration = 0) {
         const start = performance.now()
 
-        requestAnimationFrame(function animate (time) {
+        requestAnimationFrame(function animate(time) {
             const delta = Math.min(Math.max((time - start) / duration, 0), 1)
             draw(delta)
             if (delta < 1) {
@@ -72,18 +82,28 @@ export class Drawable extends EventAware {
         })
     }
 
-    getTop () {
-        return this.config.paddingTop
+    getTop() {
+        return this.config.padding.top
     }
 
-    getBottom () {
-        return this.canvas.height - this.config.paddingBottom
+    getLeft() {
+        return this.config.padding.left
     }
 
-    resize () {
+    getRight() {
+        return this.config.padding.left + this.canvas.drawableWidth
+    }
+
+    getBottom() {
+        return this.canvas.height - this.config.padding.bottom
+    }
+
+    resize() {
+        const { left = 0, top = 0, right = 0, bottom = 0 } = this.config.padding
         this.canvas.width = this.canvas.clientWidth
+        this.canvas.drawableWidth = this.canvas.clientWidth - left - right
         this.canvas.drawableHeight = this.canvas.clientWidth * this.config.hToWRatio
-        this.canvas.height = this.canvas.drawableHeight + this.config.paddingTop + this.config.paddingBottom
+        this.canvas.height = this.canvas.drawableHeight + top + bottom
         this.initCanvas()
     }
 }

@@ -36,21 +36,21 @@ export class XAxis extends Drawable {
     }
 
     calculateRatio () {
-        this.ratio = this.canvas.width / (this.right - this.left)
+        this.ratio = this.canvas.drawableWidth / (this.right - this.left)
     }
 
     draw () {
         this.clear()
         this.context.globalAlpha = this.alpha
         for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.round(this.left + i * this.step)
-            const x = i * this.step * this.ratio
+            const index = Math.max(Math.round(this.left + i * this.step), 1)
+            const x = i * this.step * this.ratio + this.getLeft()
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
         this.context.globalAlpha = 1 - this.alpha
         for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.round(this.left + i * this.oldStep)
-            const x = i * this.oldStep * this.ratio
+            const index = Math.max(Math.round(this.left + i * this.oldStep), 1)
+            const x = i * this.oldStep * this.ratio + this.getLeft()
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
     }
@@ -59,8 +59,8 @@ export class XAxis extends Drawable {
         this.clear()
         this.context.globalAlpha = 1
         for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.round(this.left + this.offset + i * this.step)
-            const x = this.offset + i * this.step * this.ratio
+            const index = Math.max(Math.round(this.left + this.offset + i * this.step), 1)
+            const x = this.offset + i * this.step * this.ratio + this.getLeft()
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
     }
@@ -70,7 +70,6 @@ export class XAxis extends Drawable {
             return
         }
         if (right - left === this.right - this.left) {
-            console.log('barrel')
             this.offset = this.offset + left - this.left
             this.left = left
             this.right = right
@@ -79,13 +78,12 @@ export class XAxis extends Drawable {
                 offset: 0
             }, 300)
         } else {
-            console.log('shiffle')
             this.oldStep = this.step
             this.alpha = 0.5
             this.left = left
             this.right = right
             this.step = (right - left) / this.linesCount
-            const newRatio = this.canvas.width / (this.right - this.left)
+            const newRatio = this.canvas.drawableWidth / (this.right - this.left)
 
             this.animateProperties(this.draw, {
                 alpha: 1,

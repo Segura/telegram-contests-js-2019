@@ -85,9 +85,15 @@ export class Scope extends Drawable {
     }
 
     handleMouseMove(e) {
-        const { shouldDrag, shouldResize } = this.scopeOptions
-        this.scopeOptions.canDrag = this.shouldDrag(e.layerX)
-        this.scopeOptions.canResize = !this.scopeOptions.canDrag && this.shouldResize(e.layerX)
+        const { shouldDrag, shouldResize, scopeStart, scopeEnd } = this.scopeOptions
+        const mouseX = e.pageX - this.canvas.parentNode.offsetLeft
+        e.preventDefault()
+        e.stopPropagation()
+        if ((mouseX < 0 && scopeStart === this.getLeft()) || (mouseX >= this.canvas.width && scopeEnd === this.getRight())) {
+            return
+        }
+        this.scopeOptions.canDrag = this.shouldDrag(mouseX)
+        this.scopeOptions.canResize = !this.scopeOptions.canDrag && this.shouldResize(mouseX)
         this.canvas.style.cursor = 'auto'
         if (this.scopeOptions.canDrag) {
             this.canvas.style.cursor = 'move'
@@ -161,6 +167,6 @@ export class Scope extends Drawable {
     onResize() {
         super.resize()
         this.initCanvas()
-        this.draw();
+        this.draw()
     }
 }

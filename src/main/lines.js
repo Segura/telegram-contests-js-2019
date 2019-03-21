@@ -34,7 +34,7 @@ export class Lines extends Drawable {
     changeRange(left, right) {
         this.left = left
         this.right = right
-        this.step = this.canvas.width / (this.right - this.left)
+        this.step = this.canvas.drawableWidth / (this.right - this.left)
         this.animate(this.draw)
     }
 
@@ -48,9 +48,9 @@ export class Lines extends Drawable {
         this.context.globalAlpha = isFinite(lineOpacity) ? lineOpacity : 1
         this.context.strokeStyle = line.color
         this.context.beginPath()
-        this.context.moveTo(0, this.getBottom() - this.ratio * (line.data[this.left] - this.min))
+        this.context.moveTo(this.getLeft(), this.getBottom() - this.ratio * (line.data[this.left] - this.min))
         for (let i = this.left; i <= this.right; i++) {
-            this.context.lineTo((i - this.left) * this.step, this.getBottom() - this.ratio * (line.data[i] - this.min))
+            this.context.lineTo((i - this.left) * this.step + this.getLeft(), this.getBottom() - this.ratio * (line.data[i] - this.min))
         }
         this.context.stroke()
         this.context.globalAlpha = 1
@@ -72,22 +72,27 @@ export class Lines extends Drawable {
         super.resize()
         this.ratio = this.canvas.drawableHeight / (this.max - this.min)
         this.config.paddingBottom = this.min * this.ratio
-        this.step = this.canvas.width / (this.right - this.left)
+        this.step = this.canvas.drawableWidth / (this.right - this.left)
         this.draw()
     }
 
     handleMouseMove(e) {
-        const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
-        const detail = this.getVisibleLines().reduce((result, line) => {
-            result.lines.push({
-                y: this.getBottom() - Math.round((line.data[index] - this.min) * this.ratio),
-                value: line.data[index],
-                color: line.color,
-                title: line.title
-            })
-            return result
-        }, { lines: [], x: (index - this.left) * this.step, index, show: true })
-        this.notify('toggleDetails', detail)
+        if (e.buttons === 0) {
+            const index = Math.round((e.pageX - this.canvas.parentNode.offsetLeft) / this.step + this.left)
+            if (index > this.right) {
+                return
+            }
+            const detail = this.getVisibleLines().reduce((result, line) => {
+                result.lines.push({
+                    y: this.getBottom() - Math.round((line.data[index] - this.min) * this.ratio),
+                    value: line.data[index],
+                    color: line.color,
+                    title: line.title
+                })
+                return result
+            }, { lines: [], x: (index - this.left) * this.step + this.getLeft(), index, show: true })
+            this.notify('toggleDetails', detail)
+        }
     }
 
     handleMouseLeave() {

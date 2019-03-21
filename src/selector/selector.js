@@ -29,8 +29,12 @@ export class Selector {
         return {
             hToWRatio: 0.05,
             lineWidth: 1,
-            paddingTop: 10,
-            paddingBottom: 10,
+            padding: {
+                top: 10,
+                bottom: 10,
+                left: 0,
+                right: 0
+            }
         }
     }
 

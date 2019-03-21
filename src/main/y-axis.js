@@ -52,10 +52,10 @@ export class YAxis extends Drawable {
 
     drawLine (position, text) {
         this.context.beginPath();
-        this.context.moveTo(0, position);
-        this.context.lineTo(this.canvas.width, position);
+        this.context.moveTo(this.getLeft(), position);
+        this.context.lineTo(this.getRight(), position);
         this.context.stroke();
-        this.context.fillText(text.toString(), 0, position - this.config.textMargin);
+        this.context.fillText(text.toString(), this.getLeft(), position - this.config.textMargin);
     }
 
     changeBounds (min, max) {

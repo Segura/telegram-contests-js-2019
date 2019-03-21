@@ -42,8 +42,12 @@ export class Main {
             linesCount: 4,
             hToWRatio: 0.25,
             lineWidth: 3,
-            paddingTop: 40,
-            paddingBottom: 20,
+            padding: {
+                top: 40,
+                bottom: 20,
+                left: 0,
+                right: 0
+            },
             formatOptions: {
                 locale: 'ru-RU',
                 options: {
