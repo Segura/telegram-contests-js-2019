@@ -27,6 +27,7 @@ export class Main {
         this.lines.changeBounds(this.min, this.max)
         this.lines.changeRange(this.left, this.right)
         this.lines.subscribe('mousemove', this.lines.handleMouseMove)
+        this.lines.subscribe('mouseleave', this.lines.handleMouseLeave)
 
         this.details = new Details(this.container, this.x, this.config)
 

@@ -12,13 +12,13 @@ export class Details extends Drawable {
         this.popup = new Popup(this.container, { ...this.config, header: '', lines: [], position: { x: 0, y: 0 } })
 
         this.drawPoint = this.drawPoint.bind(this)
-        this.hideDetails = this.hideDetails.bind(this)
-        this.subscribe('showDetails', this.handleShowDetails.bind(this))
-        this.subscribe('hideDetails', this.hideDetails)
-        this.subscribe('mouseleave', this.hideDetails)
+        this.show = this.show.bind(this)
+        this.hide = this.hide.bind(this)
+        this.toggle = this.toggle.bind(this)
+        this.subscribe('toggleDetails', this.toggle)
     }
 
-    handleShowDetails(e) {
+    show(e) {
         const { x, lines, index } = e.detail
         this.x = x
         this.lines = lines
@@ -47,9 +47,17 @@ export class Details extends Drawable {
         }, Number.MAX_SAFE_INTEGER)
     }
 
-    hideDetails() {
+    hide() {
         this.clear()
         this.popup.hide()
+    }
+
+    toggle(e) {
+        if (e.detail.show) {
+            this.show(e)
+        } else {
+            this.hide()
+        }
     }
 
     drawLine() {

@@ -7,6 +7,7 @@ export class Lines extends Drawable {
 
         this.drawLine = this.drawLine.bind(this)
         this.handleMouseMove = this.handleMouseMove.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this)
 
         this.lines = lines
         this.ratio = 0
@@ -74,8 +75,14 @@ export class Lines extends Drawable {
                     title: line.title
                 })
                 return result
-            }, { lines: [], x: (index - this.left) * this.step, index })
-            this.notify('showDetails', detail)
+            }, { lines: [], x: (index - this.left) * this.step, index, show: true })
+            this.notify('toggleDetails', detail)
+        }
+    }
+
+    handleMouseLeave(e) {
+        if (e) {
+            this.notify('toggleDetails', { show: false })
         }
     }
 }
