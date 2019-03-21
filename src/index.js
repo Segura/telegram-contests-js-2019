@@ -2,9 +2,7 @@ import { Chart } from './chart'
 
 export const draw = (container, loadDataPromise, config = {}) => {
     loadDataPromise.then((rawData) => {
-        console.log(rawData);
         const normalizedData = normalizeChartData(container, rawData);
-        console.log(normalizedData);
         new Chart(container, normalizedData, config);
     })
 };
