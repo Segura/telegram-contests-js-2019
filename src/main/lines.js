@@ -11,6 +11,7 @@ export class Lines extends Drawable {
 
         this.lines = lines
         this.ratio = 0
+        this.linesOpacity = {}
 
         this.animate(this.draw)
     }
@@ -39,10 +40,12 @@ export class Lines extends Drawable {
 
     draw() {
         this.clear()
-        this.getVisibleLines().forEach(this.drawLine)
+        this.lines.forEach(this.drawLine)
     }
 
     drawLine(line) {
+        const lineOpacity = this.linesOpacity[line.name]
+        this.context.globalAlpha = isFinite(lineOpacity) ? lineOpacity : 1
         this.context.strokeStyle = line.color
         this.context.beginPath()
         this.context.moveTo(0, this.getBottom() - this.ratio * (line.data[this.left] - this.min))
@@ -50,10 +53,19 @@ export class Lines extends Drawable {
             this.context.lineTo((i - this.left) * this.step, this.getBottom() - this.ratio * (line.data[i] - this.min))
         }
         this.context.stroke()
+        this.context.globalAlpha = 1
     }
 
     getVisibleLines() {
         return this.lines.filter(line => line.isVisible)
+    }
+
+    setLineState(id, state) {
+        const targetOpacity = state ? 0 : 1
+        this.animate((delta) => {
+            this.linesOpacity[id] = Math.abs(delta - targetOpacity)
+            this.draw()
+        }, 300)
     }
 
     onResize() {
