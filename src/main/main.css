@@ -13,8 +13,8 @@
     position: absolute;
     left: 0;
     top: 0;
-    border: 1px solid rgba(0,0,0,0.5);
-    box-shadow: 0 0 0.8em rgba(0,0,0,0.5);
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 0 0 0.8em rgba(0,0,0,0.3);
     padding: 0.8em;
     border-radius: 0.3em;
     flex-direction: column;

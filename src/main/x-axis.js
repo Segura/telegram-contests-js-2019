@@ -24,7 +24,7 @@ export class XAxis extends Drawable {
     }
 
     initCanvas () {
-        this.context.fillStyle = '#96A2AA'
+        this.context.fillStyle = 'rgba(150,162,170,0.7)'
         this.context.font = '24px Ubuntu'
         this.context.textAlign = 'center'
     }
