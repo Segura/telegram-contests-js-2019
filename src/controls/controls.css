@@ -4,12 +4,12 @@
     flex-flow: wrap;
 }
 
-.control-container label[class="seria-toggler"]:nth-child(n) {
+.control-container .seria-toggler:nth-child(n) {
     margin-right: 0.8em;
     margin-bottom: 0.8em;
 }
 
-.control-container label[class="seria-toggler"]:last-child {
+.control-container .seria-toggler:last-child {
     margin-right: 0;
 }
 
@@ -64,7 +64,7 @@
     transition-property: visibility;
     visibility: visible;
 }
-.control-canvas {
-    height: 200px;
-    width: 1000px;
+
+.control-container-disabled .seria-toggler input[type="checkbox"]:checked ~ * {
+    opacity: 0.5;
 }
