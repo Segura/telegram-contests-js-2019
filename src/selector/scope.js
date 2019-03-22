@@ -153,8 +153,8 @@ export class Scope extends Drawable {
     notifyChanges(config) {
         const ratio = this.maxX / this.canvas.width
         this.notify('changeRange', {
-            start: Math.floor(1 + ratio * config.scopeStart),
-            end: Math.floor(ratio * config.scopeEnd)
+            start: Math.round(1 + ratio * config.scopeStart),
+            end: Math.round(ratio * config.scopeEnd)
         })
     }
 
