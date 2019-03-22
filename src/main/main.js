@@ -49,7 +49,7 @@ export class Main {
                 right: 0
             },
             formatOptions: {
-                locale: 'ru-RU',
+                locale: navigator.language,
                 options: {
                     weekday: 'short', month: 'short', day: 'numeric'
                 }
