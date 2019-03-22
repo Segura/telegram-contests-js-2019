@@ -58,9 +58,9 @@ export class XAxis extends Drawable {
     draw2 () {
         this.clear()
         this.context.globalAlpha = 1
-        for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.max(Math.round(this.left + this.offset + i * this.step), 1)
-            const x = this.offset + i * this.step * this.ratio + this.getLeft()
+        for (let i = 0; i < this.linesCount + 1; i++) {
+            const index = Math.max(Math.floor(i * this.step + (Math.trunc((this.left + this.offset) / this.step) * this.step)), 1)
+            const x = ((i * this.step - (this.left + this.offset) % this.step) * this.ratio + this.getLeft())
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
     }
@@ -70,7 +70,7 @@ export class XAxis extends Drawable {
             return
         }
         if (right - left === this.right - this.left) {
-            this.offset = this.offset + left - this.left
+            this.offset = this.offset - (left - this.left)
             this.left = left
             this.right = right
             this.animateProperties(this.draw2, {
