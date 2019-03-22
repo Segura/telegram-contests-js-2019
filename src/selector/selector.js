@@ -75,6 +75,7 @@ export class Selector {
         const { name, value } = e.detail
         this.changeVisible(name, value)
         this.recalculateYBounds()
+        this.lines.setLineState(name, value)
         this.lines.changeBounds(this.min, this.max)
     }
 }
