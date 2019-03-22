@@ -1,4 +1,4 @@
-import css from 'rollup-plugin-css-porter';
+import css from 'rollup-plugin-css-porter'
 
 module.exports = {
     input: './src/index.js',
@@ -7,5 +7,7 @@ module.exports = {
         format: 'iife',
         name: 'Graph'
     },
-    plugins: [ css({minified: false}) ]
-};
+    plugins: [
+        css({ minified: false })
+    ]
+}
