@@ -12,21 +12,12 @@
     </head>
     <body class="day">
 
-    <main class="graph-container">
-        <div id="container-0">
-        </div>
-
-        <div id="container-1">
-        </div>
-
-        <div id="container-2">
-        </div>
-
-        <div id="container-3">
-        </div>
-
-        <div id="container-4">
-        </div>
+    <main class="containers">
+        <div class="container" id="container-1"></div>
+        <div class="container" id="container-2"></div>
+        <div class="container" id="container-3"></div>
+        <div class="container" id="container-4"></div>
+        <div class="container" id="container-5"></div>
     </main>
 
     <footer style="text-align: center; margin-bottom: 40px;">
@@ -41,9 +32,9 @@
             data.forEach((el, index) => {
                 const loadPromise = new Promise((resolve) => resolve(el));
                 Graph.draw(
-                    document.getElementById(`container-${index}`),
+                    document.getElementById(`container-${index + 1}`),
                     loadPromise,
-                    { header: `Followers-${index}` }
+                    { header: `Followers-${index + 1}` }
                 );
             })
             const themeSwitcher = document.getElementById('theme-switcher')
