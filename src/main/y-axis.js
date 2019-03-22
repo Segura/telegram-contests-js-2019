@@ -41,12 +41,12 @@ export class YAxis extends Drawable {
         this.context.globalAlpha = this.alpha
         for (let i = 0; i <= this.linesCount; i++) {
             const y = this.getBottom() - i * this.step * this.ratio
-            this.drawLine(y, (Math.round(this.min + i * this.step)))
+            this.drawLine(y, (Math.floor(this.min + i * this.step)))
         }
         this.context.globalAlpha = 1 - this.alpha
         for (let i = 0; i <= this.linesCount; i++) {
             const y = this.getBottom() - i * this.oldStep * this.ratio
-            this.drawLine(y, (Math.round(this.min + i * this.oldStep)))
+            this.drawLine(y, (Math.floor(this.min + i * this.oldStep)))
         }
     }
 

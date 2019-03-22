@@ -43,13 +43,13 @@ export class XAxis extends Drawable {
         this.clear()
         this.context.globalAlpha = this.alpha
         for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.max(Math.round(this.left + i * this.step), 1)
+            const index = Math.max(Math.floor(this.left + i * this.step), 1)
             const x = i * this.step * this.ratio + this.getLeft()
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
         this.context.globalAlpha = 1 - this.alpha
         for (let i = 0; i < this.linesCount; i++) {
-            const index = Math.max(Math.round(this.left + i * this.oldStep), 1)
+            const index = Math.max(Math.floor(this.left + i * this.oldStep), 1)
             const x = i * this.oldStep * this.ratio + this.getLeft()
             this.context.fillText(formatValue(this.data[index], this.config.formatOptions), x, this.getBottom());
         }
