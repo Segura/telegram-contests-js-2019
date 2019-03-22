@@ -53,7 +53,8 @@ export class Main {
                 options: {
                     weekday: 'short', month: 'short', day: 'numeric'
                 }
-            }
+            },
+            fontSizeRatio: 1.8
         }
     }
 

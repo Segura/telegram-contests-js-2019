@@ -23,7 +23,7 @@ export class YAxis extends Drawable {
         this.context.strokeStyle = 'rgba(200,200,200,0.8)'
         this.context.strokeWidth = 2
         this.context.fillStyle = 'rgba(150,162,170,0.7)'
-        this.context.font = '24px Ubuntu'
+        this.context.font = `${this.getFontSize()}px Ubuntu`
     }
 
     onResize () {

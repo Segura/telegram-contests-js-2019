@@ -36,7 +36,8 @@ export class Details extends Drawable {
             header: formatValue(this.xAxis[this.index], this.config.formatOptions),
             lines: this.lines,
             ratio: this.x / this.canvas.drawableWidth,
-            position: { x: this.x, y: this.y }
+            position: { x: this.x, y: this.y },
+            fontSize: this.getFontSize()
         })
         this.popup.show()
     }

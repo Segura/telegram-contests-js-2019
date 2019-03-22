@@ -98,6 +98,10 @@ export class Drawable extends EventAware {
         return this.canvas.height - this.config.padding.bottom
     }
 
+    getFontSize () {
+        return Math.round(this.config.fontSizeRatio * this.canvas.width / 100);
+    }
+
     resize() {
         const { left = 0, top = 0, right = 0, bottom = 0 } = this.config.padding
         this.canvas.width = this.canvas.clientWidth
