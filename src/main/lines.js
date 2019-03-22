@@ -3,7 +3,7 @@ import { Drawable } from './drawable'
 export class Lines extends Drawable {
 
     constructor(container, lines, config = {}) {
-        super(container, config)
+        super(container, 'lines', config)
 
         this.drawLine = this.drawLine.bind(this)
         this.handleMouseMove = this.handleMouseMove.bind(this)

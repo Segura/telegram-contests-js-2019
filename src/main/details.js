@@ -6,7 +6,7 @@ import { Popup } from './popup'
 export class Details extends Drawable {
 
     constructor(container, data, config = {}) {
-        super(container, config)
+        super(container, 'details', config)
 
         this.xAxis = data
         this.popup = new Popup(this.container, { ...this.config, header: '', lines: [], position: { x: 0, y: 0 } })

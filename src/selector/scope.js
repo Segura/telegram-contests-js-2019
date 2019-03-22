@@ -4,7 +4,7 @@ import { EventAware } from '../common/event-aware'
 export class Scope extends Drawable {
 
     constructor(container, config) {
-        super(container, config)
+        super(container, 'scope', config)
 
         this.maxX = config.maxX
 

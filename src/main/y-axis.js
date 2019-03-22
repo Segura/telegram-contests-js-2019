@@ -3,7 +3,7 @@ import { Drawable } from './drawable'
 export class YAxis extends Drawable {
 
     constructor (container, min, max, config = {}) {
-        super(container, config)
+        super(container, 'yaxis', config)
         this.linesCount = config.linesCount
 
         this.draw = this.draw.bind(this)

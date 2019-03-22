@@ -2,10 +2,10 @@ import { EventAware } from '../common/event-aware'
 
 export class Drawable extends EventAware {
 
-    constructor(container, config = {}) {
+    constructor(container, className, config = {}) {
         super(container)
         this.canvas = document.createElement('canvas')
-        this.canvas.classList.add(this.constructor.name.toLowerCase())
+        this.canvas.classList.add(className)
         this.context = this.canvas.getContext('2d')
         this.container.appendChild(this.canvas)
         this.config = Object.assign(this.getDefaultConfig(), config)

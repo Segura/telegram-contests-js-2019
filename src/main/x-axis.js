@@ -4,7 +4,7 @@ import { formatValue } from '../utils'
 export class XAxis extends Drawable {
 
     constructor (container, data, left, right, config = {}) {
-        super(container, config)
+        super(container, 'xaxis', config)
         this.data = data
         this.linesCount = config.linesCount
 
