@@ -28,6 +28,7 @@ export class Main {
         this.lines.changeRange(this.left, this.right)
         this.lines.subscribe('mousemove', this.lines.handleMouseMove)
         this.lines.subscribe('mouseleave', this.lines.handleMouseLeave)
+        this.lines.subscribe('scroll', this.lines.handleMouseLeave)
 
         this.details = new Details(this.container, this.x, this.config)
 
