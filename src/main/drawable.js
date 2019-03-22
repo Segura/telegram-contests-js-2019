@@ -99,7 +99,8 @@ export class Drawable extends EventAware {
     }
 
     getFontSize () {
-        return Math.round(this.config.fontSizeRatio * this.canvas.width / 100);
+        const fontSize = Math.round(this.config.fontSizeRatio * this.canvas.width / 100)
+        return Math.min(Math.max(fontSize, this.config.minFontSize), this.config.maxFontSize);
     }
 
     resize() {

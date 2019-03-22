@@ -54,7 +54,9 @@ export class Main {
                     weekday: 'short', month: 'short', day: 'numeric'
                 }
             },
-            fontSizeRatio: 1.8
+            fontSizeRatio: 1.8,
+            minFontSize: 12,
+            maxFontSize: 22
         }
     }
 
