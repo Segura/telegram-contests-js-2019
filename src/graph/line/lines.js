@@ -1,4 +1,4 @@
-import { Drawable } from './drawable'
+import { Drawable } from '../../main/drawable'
 
 export class Lines extends Drawable {
 
