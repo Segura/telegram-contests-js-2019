@@ -14,7 +14,6 @@ export class YAxis extends Drawable {
 
     getDefaultConfig () {
         return {
-            textMargin: 16,
             chartPadding: 4
         }
     }
@@ -24,6 +23,7 @@ export class YAxis extends Drawable {
         this.context.strokeWidth = 2
         this.context.fillStyle = 'rgba(150,162,170,0.7)'
         this.context.font = `${this.getFontSize()}px Ubuntu`
+        this.config.textMargin = this.getFontSize() / 2
     }
 
     onResize () {
